@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sysauto_script">
+    <sysauto_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <business_calendar/>
+        <condition/>
+        <conditional>false</conditional>
+        <entered_time>1970-01-01 00:00:00</entered_time>
+        <name>CoinMarket</name>
+        <offset/>
+        <offset_type/>
+        <run_as display_value="System Administrator">6816f79cc0a8016401c5a33be04be441</run_as>
+        <run_as_tz/>
+        <run_dayofmonth>1</run_dayofmonth>
+        <run_dayofweek>1</run_dayofweek>
+        <run_period/>
+        <run_start>2021-05-24 17:37:33</run_start>
+        <run_time>1970-01-01 08:00:00</run_time>
+        <run_type>on_demand</run_type>
+        <script><![CDATA[try { 
+ var r = new sn_ws.RESTMessageV2('x_425618_integrati.CoinMarketCap', 'Default GET');
+ r.setStringParameterNoEscape('api_key', '2a3e75e8-f759-434c-a5f3-0b55c1274df0');
+
+ var response = r.execute();
+ var responseBody = response.getBody();
+ var httpStatus = response.getStatusCode();
+}
+catch(ex) {
+ var message = ex.message;
+}]]></script>
+        <sys_class_name>sysauto_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-05-24 17:38:00</sys_created_on>
+        <sys_id>121524c61b5030103f3ba9b4bd4bcba2</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>CoinMarket</sys_name>
+        <sys_package display_value="Integration Test" source="x_425618_integrati">b7de98861b1030103f3ba9b4bd4bcb43</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Integration Test">b7de98861b1030103f3ba9b4bd4bcb43</sys_scope>
+        <sys_update_name>sysauto_script_121524c61b5030103f3ba9b4bd4bcba2</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-05-24 17:41:47</sys_updated_on>
+        <time_zone/>
+        <upgrade_safe>false</upgrade_safe>
+    </sysauto_script>
+</record_update>
