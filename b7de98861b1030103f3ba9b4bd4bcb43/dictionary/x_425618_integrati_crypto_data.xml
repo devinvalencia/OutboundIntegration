@@ -1,3 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Crypto Data" max_length="40" name="x_425618_integrati_crypto_data" type="collection"/>
+    <element label="Crypto Data" max_length="40" name="x_425618_integrati_crypto_data" type="collection">
+        <element label="ID" max_length="40" name="id" type="integer"/>
+        <element label="Name" max_length="40" name="name" type="string"/>
+        <element label="Price" max_length="40" name="price" type="float"/>
+        <element label="Symbol" max_length="40" name="symbol" type="string"/>
+    </element>
 </database>

@@ -1,3 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element extends="sys_import_set_row" label="Crypto Import Set Table" max_length="40" name="x_425618_integrati_crypto_import_set_table" type="collection"/>
+    <element extends="sys_import_set_row" label="Crypto Import Set Table" max_length="40" name="x_425618_integrati_crypto_import_set_table" type="collection">
+        <element label="id" max_length="40" name="id" type="integer"/>
+        <element label="name" max_length="40" name="name" type="string"/>
+        <element label="price" max_length="40" name="price" type="float"/>
+        <element label="symbol" max_length="40" name="symbol" type="string"/>
+    </element>
 </database>

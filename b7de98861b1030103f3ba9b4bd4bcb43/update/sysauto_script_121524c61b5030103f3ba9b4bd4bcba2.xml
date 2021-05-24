@@ -23,22 +23,59 @@
  var response = r.execute();
  var responseBody = response.getBody();
  var httpStatus = response.getStatusCode();
+ this.processData(responseBody);
 }
 catch(ex) {
  var message = ex.message;
+}
+
+
+function processData(body) {
+	//Setup Import
+	var impSet = new GlideRecord('sys_import_set');
+	impSet.state = 'loading';
+	impSet.mode = 'asynchronous';
+	impSet.table_name = 'x_425618_integrati_crypto_import_set_table';
+	impSet.short_description = 'Scheduled Import';
+	impSet.insert();
+		
+	//Parse Data
+	var reponse = JSON.parse(body);
+	
+	// For every crypto object
+	for (var i = 0; i < body.data.length; i++){
+		// Crypto object
+		var currency = body.data[i];
+		var impSetRow = new GlideRecord('x_425618_integrati_crypto_import_set_table');
+		impSetRow.sys_import_state = 'pending';
+		impSetRow.sys_import_set = impSet.getUniqueValue();
+		
+		// Assign property values from crypto obj to value in import set row.
+		impSetRow.name = currency.name;
+		impSetRow.symbol = currency.symbol;
+		impSetRow.price = parseFloat(currency.quote.USD.price);
+		impSetRow.id = parseInt(currency.Id);
+		impSetRow.insert();
+	}
+	
+	impSet.state = 'loaded';
+	impSet.update();
+	
+	// Calls and runs correct transform map?
+	new GlideImportSetTransformer().transformAllMaps(impSet);
 }]]></script>
         <sys_class_name>sysauto_script</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2021-05-24 17:38:00</sys_created_on>
         <sys_id>121524c61b5030103f3ba9b4bd4bcba2</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>4</sys_mod_count>
         <sys_name>CoinMarket</sys_name>
         <sys_package display_value="Integration Test" source="x_425618_integrati">b7de98861b1030103f3ba9b4bd4bcb43</sys_package>
         <sys_policy/>
         <sys_scope display_value="Integration Test">b7de98861b1030103f3ba9b4bd4bcb43</sys_scope>
         <sys_update_name>sysauto_script_121524c61b5030103f3ba9b4bd4bcba2</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2021-05-24 17:41:47</sys_updated_on>
+        <sys_updated_on>2021-05-24 18:33:24</sys_updated_on>
         <time_zone/>
         <upgrade_safe>false</upgrade_safe>
     </sysauto_script>
